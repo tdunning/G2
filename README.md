@@ -6,4 +6,4 @@ test drastically over-estimate how interesting a situation is. This commonly hap
 frequencies of words in different contexts or deciding whether a user action is an interesting indicator that of a 
 certain purchase behavior.
 
-[![Build Status](https://github.com/tdunning/G2.jl/workflows/CI/badge.svg)](https://github.com/tdunning/G2.jl/actions/workflows/run-tests.yml?query=branch%3Amain)
+[![CI](https://github.com/tdunning/G2/actions/workflows/run-tests.yml/badge.svg)](https://github.com/tdunning/G2/actions/workflows/run-tests.yml)
