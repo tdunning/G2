@@ -25,4 +25,9 @@ end
     @test r['f'] ≈ -1.59922 atol=1e-5
     @test r['a'] ≈ 2.36327 atol=1e-5
     @test r['c'] ≈ 0.0
+    d = G2.lazy(counter("abcaba"), counter("abcbccdefdefdefdef"))
+    kx = keys(r)
+    @test all(isa(r[k], Number) for k in kx)
+    @test all(isa(d[k], Number) for k in kx)
+    @test all([r[k] == d[k] for k in kx])
 end

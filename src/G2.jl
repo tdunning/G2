@@ -1,5 +1,7 @@
 module G2
 
+using DataStructures
+
 """
 Computes the G² test statistic for a contingency table in a 2x2 matrix
 
@@ -81,6 +83,37 @@ function compare(d1::AbstractDict, d2::AbstractDict)::Dict
         for k in kx)
 end
     
+
+"""
+Lazily compares counts in two tables to find which elements have interestingly
+different counts. The result has one entry for any key in either of 
+the source tables and a value equal to the g2root score related to that
+key relative to all other counts.
+
+This is done by computing a 2x2 table for each key that contains the counts
+for that key for each input table in one column and has the total counts
+for all other keys in each table in the second column. The result is
+roughly calibrated in terms of standard deviation (ISH!) and is positive
+if the frequency of a particular key is greater in d1 than in d2 and negative
+if the frequency is higher in d2.
+"""
+function lazy(d1::AbstractDict{K,V}, d2::AbstractDict{K,V}) where {K, V <: Number}
+    n1 = sum(d1)
+    n2 = sum(d2)
+    DefaultDict(passkey=true) do k
+        k11 = get(d1, k, 0)
+        k21 = get(d2, k, 0);
+	if k11 == k21 == 0
+	    throw(KeyError(k))
+	else
+	    g2root([k11 n1 - k11; k21 n2 - k21])
+	end
+    end
+end
+    
+
+
+
 
 """
 Computes entropy of counts
