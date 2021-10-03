@@ -1,0 +1,6 @@
+name = "G2"
+uuid = "ad9b4d70-6f3f-466a-95f2-ad993f044ec4"
+authors = ["Ted Dunning <ted.dunning@gmail.com>"]
+version = "0.1.0"
+
+[deps]
